@@ -6,7 +6,16 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#FFF44F",
+        secondary: "#333333",
+      },
+      fontFamily: {
+        montserrat: ["Montserrat"],
+        playfair: ["Playfair Display"],
+      },
+    },
   },
   plugins: [],
 };
