@@ -1,9 +1,9 @@
 "use client";
 
 import { AiOutlineMenu } from "react-icons/ai";
-import { NavbarAvatar } from "./Avatar";
+import { NavbarAvatar } from "../Avatar";
 import { useCallback, useState } from "react";
-import { NavbarMenuItem } from "./MenuItem";
+import { NavbarMenuItem } from "../MenuItem";
 
 export const NavbarUserMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,6 +34,7 @@ export const NavbarUserMenu = () => {
         </div>
         <div
           onClick={toggleOpen}
+          data-cy="user-menu-button"
           className="
           p-4
           md:py-1
@@ -59,6 +60,7 @@ export const NavbarUserMenu = () => {
 
       {isOpen && (
         <div
+          data-cy="user-menu-dropdown"
           className="
           absolute
           rounded-xl
@@ -74,7 +76,10 @@ export const NavbarUserMenu = () => {
           text-sm
         "
         >
-          <div className="flex flex-col cursor-pointer">
+          <div
+            data-cy="user-menu-list"
+            className="flex flex-col cursor-pointer"
+          >
             <NavbarMenuItem onClick={() => {}} label="Login" />
             <NavbarMenuItem onClick={() => {}} label="Sign up" />
           </div>
