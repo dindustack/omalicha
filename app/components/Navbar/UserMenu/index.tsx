@@ -4,13 +4,20 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { NavbarAvatar } from "../Avatar";
 import { useCallback, useState } from "react";
 import { NavbarMenuItem } from "../MenuItem";
+import { useRegisterModal } from "@/app/hooks/useRegisterModal";
 
 export const NavbarUserMenu = () => {
+  const registerModal = useRegisterModal();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleOpen = useCallback(() => {
     setIsOpen((value) => !value);
   }, []);
+
+  const handleSignupClick = () => {
+    registerModal.onOpen();
+    setIsOpen(!isOpen);
+  };
 
   return (
     <div className="relative">
@@ -81,7 +88,7 @@ export const NavbarUserMenu = () => {
             className="flex flex-col cursor-pointer"
           >
             <NavbarMenuItem onClick={() => {}} label="Login" />
-            <NavbarMenuItem onClick={() => {}} label="Sign up" />
+            <NavbarMenuItem onClick={handleSignupClick} label="Sign up" />
           </div>
         </div>
       )}

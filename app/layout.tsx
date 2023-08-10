@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { Urbanist } from "next/font/google";
 import { Navbar } from "./components/Navbar/Main";
 import { Modal } from "./components/Modal";
+import { ClientOnly } from "./components/ClientOnly";
+import { RegisterModal } from "./components/Modal/Register";
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
@@ -20,7 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={urbanist.className}>
         <>
-          <Modal isOpen />
+          <RegisterModal />
           <Navbar />
         </>
         {children}
