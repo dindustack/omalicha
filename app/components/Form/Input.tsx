@@ -8,6 +8,7 @@ interface InputProps {
   disabled?: boolean;
   formatPrice?: boolean;
   required?: boolean;
+  pattern?: Object;
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
 }
@@ -20,6 +21,7 @@ export const FormInput: React.FC<InputProps> = ({
   formatPrice,
   register,
   required,
+  pattern,
   errors,
 }) => {
   return (
@@ -33,7 +35,7 @@ export const FormInput: React.FC<InputProps> = ({
       <input
         id={id}
         disabled={disabled}
-        {...register(id, { required })}
+        {...register(id, { required, pattern })}
         placeholder=""
         type={type}
         className={`

@@ -2,9 +2,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Urbanist } from "next/font/google";
 import { Navbar } from "./components/Navbar/Main";
-import { Modal } from "./components/Modal";
-import { ClientOnly } from "./components/ClientOnly";
 import { RegisterModal } from "./components/Modal/Register";
+import { ToasterProvider } from "./providers/ToasterProvider";
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
@@ -22,6 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={urbanist.className}>
         <>
+          <ToasterProvider />
           <RegisterModal />
           <Navbar />
         </>
