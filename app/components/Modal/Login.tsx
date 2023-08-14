@@ -1,28 +1,30 @@
 "use client";
 
 import { useCallback, useState } from "react";
-import axios from "axios";
+import { signIn } from "next-auth/react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
+import { BsTwitter } from "react-icons/bs";
+import { FcGoogle } from "react-icons/fc";
 
 import { Modal } from ".";
-import { useRegisterModal } from "@/app/hooks/useRegisterModal";
 import { Heading } from "../Heading";
 import { FormInput } from "../Form/Input";
 import { Button } from "../Button";
-import { FcGoogle } from "react-icons/fc";
-import { BsTwitter } from "react-icons/bs";
 import { useLoginModal } from "@/app/hooks/useLoginModal";
+import { useRegisterModal } from "@/app/hooks/useRegisterModal";
+import { useRouter } from "next/navigation";
 
-export const RegisterModal = () => {
-  const registerModal = useRegisterModal();
+export const LoginModal = () => {
+  const router = useRouter();
   const loginModal = useLoginModal();
+  const registerModal = useRegisterModal();
   const [isLoading, setIsLoading] = useState(false);
   const EMAIL_REGEX = /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/;
 
-  const handleLoginModal = useCallback(() => {
-    registerModal.onClose();
-    loginModal.onOpen();
+  const handleSignupModal = useCallback(() => {
+    loginModal.onClose();
+    registerModal.onOpen();
   }, [registerModal, loginModal]);
 
   const {
@@ -31,7 +33,6 @@ export const RegisterModal = () => {
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
-      name: "",
       email: "",
       password: "",
     },
@@ -40,36 +41,27 @@ export const RegisterModal = () => {
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
 
-    axios
-      .post("/api/register", data)
-      .then(() => {
-        toast.success("Account creation successful");
-        registerModal.onClose();
-        loginModal.onOpen();
-      })
-      .catch((error) => {
-        toast.error("Something went wrong");
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    signIn("credentials", {
+      ...data,
+      redirect: false,
+    }).then((callback) => {
+      setIsLoading(false);
+
+      if (callback?.ok) {
+        toast.success("Successfully logged in");
+        router.refresh();
+        loginModal.onClose();
+      }
+
+      if (callback?.error) {
+        toast.error(callback.error);
+      }
+    });
   };
 
   const bodyContent = (
     <div className="flex flex-col gap-8">
-      <Heading
-        title="Welcome"
-        subtitle="Create an account to book a service"
-        center
-      />
-      <FormInput
-        id="name"
-        label="Name"
-        disabled={isLoading}
-        register={register}
-        errors={errors}
-        required
-      />
+      <Heading title="Welcome back" subtitle="Login to book a service" center />
       <FormInput
         id="email"
         label="Email"
@@ -81,8 +73,8 @@ export const RegisterModal = () => {
       />
       <FormInput
         id="password"
-        type="password"
         label="Password"
+        type="password"
         disabled={isLoading}
         register={register}
         errors={errors}
@@ -96,14 +88,14 @@ export const RegisterModal = () => {
       <hr />
       <Button
         outline
-        label="Continue with Google"
+        label="Login with Google"
         icon={FcGoogle}
         onClick={() => {}}
       />
 
       <Button
         outline
-        label="Continue with Twitter"
+        label="Login with Twitter"
         icon={BsTwitter}
         onClick={() => {}}
       />
@@ -116,12 +108,12 @@ export const RegisterModal = () => {
       "
       >
         <div className="flex justify-center flex-row items-center gap-2">
-          <div>Already have an account?</div>
+          <div>Don&apos;t have an account?</div>
           <div
-            onClick={handleLoginModal}
-            className="text-black font-bold px-2 bg-primary rounded-md cursor-pointer hover:underline hover:underline-offset-2"
+            onClick={handleSignupModal}
+            className="text-black font-bold py-1 px-2 bg-primary rounded-md cursor-pointer hover:underline hover:underline-offset-2"
           >
-            Login
+            Sign up
           </div>
         </div>
       </div>
@@ -130,10 +122,10 @@ export const RegisterModal = () => {
   return (
     <Modal
       disabled={isLoading}
-      isOpen={registerModal.isOpen}
-      title="Create an account"
-      actionLabel="Continue"
-      onClose={registerModal.onClose}
+      isOpen={loginModal.isOpen}
+      title="Login"
+      actionLabel="Login"
+      onClose={loginModal.onClose}
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}
       footer={footerCount}

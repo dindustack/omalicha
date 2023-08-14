@@ -5,19 +5,26 @@ import { NavbarAvatar } from "../Avatar";
 import { useCallback, useState } from "react";
 import { NavbarMenuItem } from "../MenuItem";
 import { useRegisterModal } from "@/app/hooks/useRegisterModal";
+import { useLoginModal } from "@/app/hooks/useLoginModal";
 
 export const NavbarUserMenu = () => {
   const registerModal = useRegisterModal();
+  const loginModal = useLoginModal();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleOpen = useCallback(() => {
     setIsOpen((value) => !value);
   }, []);
 
-  const handleSignupClick = () => {
+  const handleSignupClick = useCallback(() => {
     registerModal.onOpen();
     setIsOpen(!isOpen);
-  };
+  }, [registerModal, isOpen]);
+
+  const handleLoginClick = useCallback(() => {
+    loginModal.onOpen();
+    setIsOpen(!isOpen);
+  }, [loginModal, isOpen]);
 
   return (
     <div className="relative">
@@ -87,7 +94,7 @@ export const NavbarUserMenu = () => {
             data-cy="user-menu-list"
             className="flex flex-col cursor-pointer"
           >
-            <NavbarMenuItem onClick={() => {}} label="Login" />
+            <NavbarMenuItem onClick={handleLoginClick} label="Login" />
             <NavbarMenuItem onClick={handleSignupClick} label="Sign up" />
           </div>
         </div>

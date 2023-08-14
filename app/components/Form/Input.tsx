@@ -8,7 +8,7 @@ interface InputProps {
   disabled?: boolean;
   formatPrice?: boolean;
   required?: boolean;
-  pattern?: Object;
+  pattern?: RegExp;
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
 }
@@ -26,24 +26,25 @@ export const FormInput: React.FC<InputProps> = ({
 }) => {
   return (
     <div className="w-full relative">
-      {formatPrice && (
-        <TbCurrencyNaira
-          size={24}
-          className="text-neutral-700 absolute top-5 left-2"
-        />
-      )}
-      <input
-        id={id}
-        disabled={disabled}
-        {...register(id, { required, pattern })}
-        placeholder=""
-        type={type}
-        className={`
+      <form>
+        {formatPrice && (
+          <TbCurrencyNaira
+            size={24}
+            className="text-neutral-700 absolute top-5 left-2"
+          />
+        )}
+        <input
+          id={id}
+          disabled={disabled}
+          {...register(id, { required, pattern })}
+          placeholder=""
+          type={type}
+          className={`
           peer
           w-full
           p-4
           pt-6
-          font-light
+          font-bold
           bg-white
           border-2
           rounded-md
@@ -55,9 +56,9 @@ export const FormInput: React.FC<InputProps> = ({
           ${errors[id] ? "border-red-500" : "border-neutral-300"}
           ${errors[id] ? "focus:border-red-500" : "focus:border-black"}
         `}
-      />
-      <label
-        className={`
+        />
+        <label
+          className={`
           absolute
           text-md
           duration-150
@@ -78,9 +79,10 @@ export const FormInput: React.FC<InputProps> = ({
           peer-focus:-translate-y-4
           ${errors[id] && "text-red-500"}
         `}
-      >
-        {label}
-      </label>
+        >
+          {label}
+        </label>
+      </form>
     </div>
   );
 };

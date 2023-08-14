@@ -178,6 +178,7 @@ export const Modal: React.FC<ModalProps> = ({
                     disabled={disabled}
                     label={actionLabel}
                     onClick={handleSubmit}
+                    data-cy="submit"
                   />
                 </div>
                 {footer}
