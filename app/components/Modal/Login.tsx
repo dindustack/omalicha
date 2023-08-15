@@ -4,7 +4,7 @@ import { useCallback, useState } from "react";
 import { signIn } from "next-auth/react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import { BsTwitter } from "react-icons/bs";
+// import { BsTwitter } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
 
 import { Modal } from ".";
@@ -90,15 +90,15 @@ export const LoginModal = () => {
         outline
         label="Login with Google"
         icon={FcGoogle}
-        onClick={() => {}}
+        onClick={() => signIn("google")}
       />
 
-      <Button
+      {/* <Button
         outline
         label="Login with Twitter"
         icon={BsTwitter}
         onClick={() => {}}
-      />
+      /> */}
       <div
         className="
       text-neutral-500

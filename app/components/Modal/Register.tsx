@@ -13,6 +13,7 @@ import { Button } from "../Button";
 import { FcGoogle } from "react-icons/fc";
 import { BsTwitter } from "react-icons/bs";
 import { useLoginModal } from "@/app/hooks/useLoginModal";
+import { signIn } from "next-auth/react";
 
 export const RegisterModal = () => {
   const registerModal = useRegisterModal();
@@ -98,15 +99,15 @@ export const RegisterModal = () => {
         outline
         label="Continue with Google"
         icon={FcGoogle}
-        onClick={() => {}}
+        onClick={() => signIn("google")}
       />
 
-      <Button
+      {/* <Button
         outline
         label="Continue with Twitter"
         icon={BsTwitter}
         onClick={() => {}}
-      />
+      /> */}
       <div
         className="
       text-neutral-500

@@ -2,14 +2,18 @@
 
 import Image from "next/image";
 
-export const NavbarAvatar = () => {
+interface INavbarAvatarProps {
+  imageSrc: string | null | undefined;
+}
+
+export const NavbarAvatar: React.FC<INavbarAvatarProps> = ({ imageSrc }) => {
   return (
     <Image
       className="rounded-full ring-2 ring-primary object-cover"
       height="30"
       width="30"
       alt="Avatar"
-      src="/images/placeholder.jpg"
+      src={imageSrc || "/images/placeholder.jpg"}
     />
   );
 };

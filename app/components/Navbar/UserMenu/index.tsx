@@ -6,8 +6,15 @@ import { useCallback, useState } from "react";
 import { NavbarMenuItem } from "../MenuItem";
 import { useRegisterModal } from "@/app/hooks/useRegisterModal";
 import { useLoginModal } from "@/app/hooks/useLoginModal";
+import { signOut } from "next-auth/react";
+import { SafeUser } from "@/app/types";
+import { User } from "@prisma/client";
 
-export const NavbarUserMenu = () => {
+interface INavbarUserMenu {
+  currentUser?: User | null;
+}
+
+export const NavbarUserMenu: React.FC<INavbarUserMenu> = ({ currentUser }) => {
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
   const [isOpen, setIsOpen] = useState(false);
@@ -67,7 +74,7 @@ export const NavbarUserMenu = () => {
         >
           <AiOutlineMenu />
           <div className="hidden md:block">
-            <NavbarAvatar />
+            <NavbarAvatar imageSrc={currentUser?.image} />
           </div>
         </div>
       </div>
@@ -94,8 +101,20 @@ export const NavbarUserMenu = () => {
             data-cy="user-menu-list"
             className="flex flex-col cursor-pointer"
           >
-            <NavbarMenuItem onClick={handleLoginClick} label="Login" />
-            <NavbarMenuItem onClick={handleSignupClick} label="Sign up" />
+            {currentUser ? (
+              <>
+                <NavbarMenuItem onClick={() => {}} label="Services" />
+                <NavbarMenuItem onClick={() => {}} label="Favorites" />
+                <NavbarMenuItem onClick={() => {}} label="Reservation" />
+                <hr />
+                <NavbarMenuItem onClick={() => signOut()} label="Logout" />
+              </>
+            ) : (
+              <>
+                <NavbarMenuItem onClick={handleLoginClick} label="Login" />
+                <NavbarMenuItem onClick={handleSignupClick} label="Sign up" />
+              </>
+            )}
           </div>
         </div>
       )}
