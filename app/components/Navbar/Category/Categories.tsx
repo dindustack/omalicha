@@ -18,7 +18,7 @@ export const NavbarCategories = () => {
   }
   return (
     <Container>
-      <div className="pt-4 flex flex-row items-center gap-14 md:gap-2 justify-between overflow-x-scroll no-scrollbar overscroll-none">
+      <div className="pt-8 flex flex-row items-center gap-14 md:gap-2 justify-between overflow-x-scroll no-scrollbar overscroll-none">
         {React.Children.toArray(
           categories.map((item) => (
             <CategoryBox
