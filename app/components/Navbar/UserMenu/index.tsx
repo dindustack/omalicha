@@ -35,7 +35,7 @@ export const NavbarUserMenu: React.FC<INavbarUserMenu> = ({ currentUser }) => {
 
   return (
     <div className="relative">
-      <div className="flex flex-row items-center gap-3">
+      <div className="flex flex-row items-center gap-4">
         <div
           onClick={() => {}}
           className="
@@ -45,10 +45,11 @@ export const NavbarUserMenu: React.FC<INavbarUserMenu> = ({ currentUser }) => {
             font-semibold
             py-3
             px-4
-            rounded-full
             hover:bg-neutral-100
             transition
             cursor-pointer
+            bg-primary
+            
             "
         >
           Become a Pro
