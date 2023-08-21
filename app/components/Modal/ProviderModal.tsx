@@ -1,12 +1,14 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
+import dynamic from "next/dynamic";
 import { useProviderModal } from "@/app/hooks/useProviderModal";
 import { Modal } from ".";
 import { Heading } from "../Heading";
 import { categories } from "@/app/utils/categories";
 import { CategoryInput } from "../Form/CategoryInput";
 import { FieldValues, useForm } from "react-hook-form";
+import { CountrySelect } from "../Form/CountrySelect";
 
 enum STEPS {
   CATEGORY = 0,
@@ -42,6 +44,15 @@ export const ProviderModal = () => {
   });
 
   const category = watch("category");
+  const location = watch("location");
+
+  const DynamicMap = useMemo(
+    () =>
+      dynamic(() => import("../Map").then((mod) => mod.Map), {
+        ssr: false,
+      }),
+    [location]
+  );
 
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -75,7 +86,7 @@ export const ProviderModal = () => {
     return "Back";
   }, [step]);
 
-  const bodyContent = (
+  let bodyContent = (
     <div className="flex flex-col gap-8">
       <Heading
         title="Which of this best describes your service"
@@ -96,12 +107,29 @@ export const ProviderModal = () => {
     </div>
   );
 
+  if (step === STEPS.LOCATION) {
+    console.log(location);
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Where is your place located?"
+          subtitle="Help clients find you!"
+        />
+        <CountrySelect
+          value={location}
+          onChange={(value) => setCustomValue("location", value)}
+        />
+        <DynamicMap center={location?.latlng} />
+      </div>
+    );
+  }
+
   return (
     <Modal
       actionLabel={actionLabel}
       isOpen={providerModal.isOpen}
       onClose={providerModal.onClose}
-      onSubmit={providerModal.onClose}
+      onSubmit={onNext}
       secondaryActionLabel={secondaryActionLabel}
       secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
       title="Become a service provider"

@@ -20,7 +20,7 @@ export const CategoryInput: React.FC<CategoryInputProps> = ({
       onClick={() => onClick(label)}
       className={`
         rounded-xl
-        border-2
+        border-[1px]
         p-4
         flex
         flex-col
