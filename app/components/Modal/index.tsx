@@ -129,7 +129,8 @@ export const Modal: React.FC<ModalProps> = ({
                 className="
                   flex
                   items-center
-                  p-6
+                  p-4
+                  md:p-6
                   rounded-t
                   justify-between               
                   border-b-[1px]
@@ -144,8 +145,7 @@ export const Modal: React.FC<ModalProps> = ({
                     p-1
                     border-0
                     hover:opacity-70
-                    transition
-                    
+                    transition 
                   "
                 >
                   <IoMdClose size={18} />
@@ -153,10 +153,10 @@ export const Modal: React.FC<ModalProps> = ({
               </div>
 
               {/* BODY */}
-              <div className="relative p-6 flex-auto">{body}</div>
+              <div className="relative p-4 md:p-6 flex-auto">{body}</div>
 
               {/* FOOTER */}
-              <div className="flex flex-col gap-2 p-6">
+              <div className="flex flex-col gap-2 p-4 md:p-6">
                 <div
                   className="
                     flex 

@@ -9,6 +9,7 @@ import { categories } from "@/app/utils/categories";
 import { CategoryInput } from "../Form/CategoryInput";
 import { FieldValues, useForm } from "react-hook-form";
 import { CountrySelect } from "../Form/CountrySelect";
+import { Counter } from "../Form/Counter";
 
 enum STEPS {
   CATEGORY = 0,
@@ -38,6 +39,7 @@ export const ProviderModal = () => {
       clientCount: 1,
       imageSrc: "",
       price: 1,
+      experience: 1,
       title: "",
       description: "",
     },
@@ -45,6 +47,8 @@ export const ProviderModal = () => {
 
   const category = watch("category");
   const location = watch("location");
+  const clientCount = watch("clientCount");
+  const experience = watch("experience");
 
   const DynamicMap = useMemo(
     () =>
@@ -108,7 +112,6 @@ export const ProviderModal = () => {
   );
 
   if (step === STEPS.LOCATION) {
-    console.log(location);
     bodyContent = (
       <div className="flex flex-col gap-8">
         <Heading
@@ -120,6 +123,31 @@ export const ProviderModal = () => {
           onChange={(value) => setCustomValue("location", value)}
         />
         <DynamicMap center={location?.latlng} />
+      </div>
+    );
+  }
+
+  if (step === STEPS.INFO) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Share basic information about your business"
+          subtitle="What services do you offer?"
+        />
+
+        <Counter
+          title="Clients"
+          subtitle="How many clients per day"
+          value={clientCount}
+          onChange={(value) => setCustomValue("clientCount", value)}
+        />
+
+        <Counter
+          title="Experience"
+          subtitle="How many years of experience"
+          value={experience}
+          onChange={(value) => setCustomValue("experience", value)}
+        />
       </div>
     );
   }
