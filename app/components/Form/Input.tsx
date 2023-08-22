@@ -30,7 +30,7 @@ export const FormInput: React.FC<InputProps> = ({
         {formatPrice && (
           <TbCurrencyNaira
             size={24}
-            className="text-neutral-700 absolute top-5 left-2"
+            className="text-neutral-700 absolute top-6 left-2"
           />
         )}
         <input

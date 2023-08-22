@@ -2,15 +2,21 @@
 
 import React, { useMemo, useState } from "react";
 import dynamic from "next/dynamic";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import axios from "axios";
+
 import { useProviderModal } from "@/app/hooks/useProviderModal";
+import { categories } from "@/app/utils/categories";
+
 import { Modal } from ".";
 import { Heading } from "../Heading";
-import { categories } from "@/app/utils/categories";
 import { CategoryInput } from "../Form/CategoryInput";
-import { FieldValues, useForm } from "react-hook-form";
 import { CountrySelect } from "../Form/CountrySelect";
 import { Counter } from "../Form/Counter";
 import { ImageUpload } from "../Form/ImageUpload";
+import { FormInput } from "../Form/Input";
+import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 
 enum STEPS {
   CATEGORY = 0,
@@ -22,6 +28,7 @@ enum STEPS {
 }
 
 export const ProviderModal = () => {
+  const router = useRouter();
   const providerModal = useProviderModal();
 
   const [step, setStep] = useState(STEPS.CATEGORY);
@@ -39,11 +46,11 @@ export const ProviderModal = () => {
       category: "",
       location: null,
       clientCount: 1,
-      imageSrc: "",
-      price: 1,
       experience: 1,
+      imageSrc: "",
       title: "",
       description: "",
+      price: 1,
     },
   });
 
@@ -71,6 +78,30 @@ export const ProviderModal = () => {
 
   const onBack = () => {
     setStep((value) => value - 1);
+  };
+
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    if (step !== STEPS.PRICE) {
+      return onNext();
+    }
+
+    setIsLoading(true);
+
+    axios
+      .post("/api/listings", data)
+      .then(() => {
+        toast.success("Service Created!");
+        router.refresh();
+        reset();
+        setStep(STEPS.CATEGORY);
+        providerModal.onClose();
+      })
+      .catch(() => {
+        toast.error("Something went wrong.");
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const onNext = () => {
@@ -170,12 +201,63 @@ export const ProviderModal = () => {
     );
   }
 
+  if (step === STEPS.DESCRIPTION) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="How would you describe your business"
+          subtitle="The shorter the better!"
+        />
+        <FormInput
+          id="title"
+          label="Title"
+          type="text"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+        <hr />
+        <FormInput
+          id="description"
+          label="Description"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+      </div>
+    );
+  }
+
+  if (step === STEPS.PRICE) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Set your service fee"
+          subtitle="How much do you charge per service?"
+        />
+
+        <FormInput
+          id="price"
+          label="Price"
+          formatPrice
+          type="number"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+      </div>
+    );
+  }
+
   return (
     <Modal
       actionLabel={actionLabel}
       isOpen={providerModal.isOpen}
       onClose={providerModal.onClose}
-      onSubmit={onNext}
+      onSubmit={handleSubmit(onSubmit)}
       secondaryActionLabel={secondaryActionLabel}
       secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
       title="Become a service provider"
