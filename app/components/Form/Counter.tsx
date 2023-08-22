@@ -52,7 +52,7 @@ export const Counter: React.FC<CounterProps> = ({
         >
           <AiOutlineMinus />
         </div>
-        <div className="font-bold text-xl text-black">{value}</div>
+        <div className="font-semibold text-xl text-black">{value}</div>
         <div
           onClick={handleAddition}
           className="

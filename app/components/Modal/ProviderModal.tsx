@@ -10,6 +10,7 @@ import { CategoryInput } from "../Form/CategoryInput";
 import { FieldValues, useForm } from "react-hook-form";
 import { CountrySelect } from "../Form/CountrySelect";
 import { Counter } from "../Form/Counter";
+import { ImageUpload } from "../Form/ImageUpload";
 
 enum STEPS {
   CATEGORY = 0,
@@ -24,6 +25,7 @@ export const ProviderModal = () => {
   const providerModal = useProviderModal();
 
   const [step, setStep] = useState(STEPS.CATEGORY);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -49,6 +51,7 @@ export const ProviderModal = () => {
   const location = watch("location");
   const clientCount = watch("clientCount");
   const experience = watch("experience");
+  const imageSrc = watch("imageSrc");
 
   const DynamicMap = useMemo(
     () =>
@@ -147,6 +150,21 @@ export const ProviderModal = () => {
           subtitle="How many years of experience"
           value={experience}
           onChange={(value) => setCustomValue("experience", value)}
+        />
+      </div>
+    );
+  }
+
+  if (step === STEPS.IMAGES) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Add a photo of your service"
+          subtitle="Show clients your service"
+        />
+        <ImageUpload
+          value={imageSrc}
+          onChange={(value) => setCustomValue("imageSrc", value)}
         />
       </div>
     );
