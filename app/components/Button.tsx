@@ -8,12 +8,14 @@ interface ButtonProps {
   disabled?: boolean;
   outline?: boolean;
   small?: boolean;
+  colored?: boolean;
   icon?: IconType;
 }
 
 export const Button: React.FC<ButtonProps> = ({
   label,
   onClick,
+  colored,
   disabled,
   outline,
   small,
@@ -32,12 +34,13 @@ export const Button: React.FC<ButtonProps> = ({
         transition
         w-full
         ${outline ? "bg-white" : "bg-black"}
-        ${outline ? "border-black" : "border-black"}
+        ${outline ? "border-black" : "border-none"}
         ${outline ? "text-black" : "text-white"}
+        ${colored && "bg-primary !text-black"}
         ${small ? "py-1" : "py-3"}
         ${small ? "text-sm" : "text-md"}
-        ${small ? "fint-light" : "font-semibold"}
-        ${small ? "boreder-[1px]" : "border-2"}
+        ${small ? "font-light" : "font-semibold"}
+        ${small ? "border-[1px]" : "border-2"}
     `}
     >
       {Icon && (
