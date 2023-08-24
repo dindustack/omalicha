@@ -1,5 +1,5 @@
 import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
-import { TbCurrencyNaira } from "react-icons/tb";
+import { TbCurrencyDollar } from "react-icons/tb";
 
 interface InputProps {
   id: string;
@@ -28,7 +28,7 @@ export const FormInput: React.FC<InputProps> = ({
     <div className="w-full relative">
       <form>
         {formatPrice && (
-          <TbCurrencyNaira
+          <TbCurrencyDollar
             size={24}
             className="text-neutral-700 absolute top-6 left-2"
           />

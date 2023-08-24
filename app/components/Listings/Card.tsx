@@ -32,6 +32,8 @@ export const ListingCard: React.FC<ListingCardProps> = ({
 
   const location = getByValue(data.locationValue);
 
+  console.log(data.locationValue);
+
   const handleCancel = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>) => {
       event.stopPropagation();
@@ -102,7 +104,7 @@ export const ListingCard: React.FC<ListingCardProps> = ({
           {reservationDate || data.category}
         </div>
         <div className="flex flex-row items-center gap-1">
-          <div className="font-semibold">₦ {price}</div>
+          <div className="font-semibold">$ {price}</div>
           {!reservation && <div className="font-light">/session</div>}
         </div>
         {onAction && actionLabel && (
