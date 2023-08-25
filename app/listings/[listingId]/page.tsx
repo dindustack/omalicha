@@ -20,7 +20,7 @@ const ListingPage = async ({ params }: { params: IParams }) => {
     );
   }
   return (
-    <div className="bg-[#FFFDDE] pt-28 min-h-[100vh]">
+    <div className="min-h-[100vh]">
       <ListingClient listing={listing} currentUser={currentUser} />
     </div>
   );
