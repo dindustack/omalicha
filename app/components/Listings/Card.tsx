@@ -32,8 +32,6 @@ export const ListingCard: React.FC<ListingCardProps> = ({
 
   const location = getByValue(data.locationValue);
 
-  console.log(data.locationValue);
-
   const handleCancel = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>) => {
       event.stopPropagation();

@@ -19,7 +19,7 @@ export default async function Home() {
     );
   }
   return (
-    <ClientOnly>
+    <div className="pt-28 bg-white">
       <Container>
         <div
           className="
@@ -42,6 +42,6 @@ export default async function Home() {
           )}
         </div>
       </Container>
-    </ClientOnly>
+    </div>
   );
 }

@@ -90,7 +90,7 @@ export const NavbarUserMenu: React.FC<INavbarUserMenu> = ({ currentUser }) => {
         >
           <AiOutlineMenu />
           <div className="hidden md:block">
-            <NavbarAvatar imageSrc={currentUser?.image} />
+            <NavbarAvatar imageSrc={currentUser?.image} size={30} />
           </div>
         </div>
       </div>
