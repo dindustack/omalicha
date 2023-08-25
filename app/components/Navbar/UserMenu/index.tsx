@@ -1,14 +1,17 @@
 "use client";
 
-import { AiOutlineMenu } from "react-icons/ai";
-import { NavbarAvatar } from "../Avatar";
 import { useCallback, useState } from "react";
+import { AiOutlineMenu } from "react-icons/ai";
+import { signOut } from "next-auth/react";
+
+import { NavbarAvatar } from "../Avatar";
 import { NavbarMenuItem } from "../MenuItem";
+
+import { User } from "@prisma/client";
 import { useRegisterModal } from "@/app/hooks/useRegisterModal";
 import { useLoginModal } from "@/app/hooks/useLoginModal";
-import { signOut } from "next-auth/react";
-import { SafeUser } from "@/app/types";
-import { User } from "@prisma/client";
+import { useProviderModal } from "@/app/hooks/useProviderModal";
+// import { SafeUser } from "@/app/types";
 
 interface INavbarUserMenu {
   currentUser?: User | null;
@@ -17,6 +20,7 @@ interface INavbarUserMenu {
 export const NavbarUserMenu: React.FC<INavbarUserMenu> = ({ currentUser }) => {
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
+  const providerModal = useProviderModal();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleOpen = useCallback(() => {
@@ -33,11 +37,19 @@ export const NavbarUserMenu: React.FC<INavbarUserMenu> = ({ currentUser }) => {
     setIsOpen(!isOpen);
   }, [loginModal, isOpen]);
 
+  const isProvider = useCallback(() => {
+    if (!currentUser) {
+      return loginModal.onOpen();
+    }
+
+    providerModal.onOpen();
+  }, [currentUser, loginModal, providerModal]);
+
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-4">
         <div
-          onClick={() => {}}
+          onClick={isProvider}
           className="
             hidden
             lg:block
@@ -45,14 +57,17 @@ export const NavbarUserMenu: React.FC<INavbarUserMenu> = ({ currentUser }) => {
             font-semibold
             py-3
             px-4
-            hover:bg-neutral-100
-            transition
+            border-[2px]
+            border-primary
+            hover:border-primary
+            hover:bg-transparent
+            transition 
             cursor-pointer
             bg-primary
             
             "
         >
-          Become a Pro
+          Register a service
         </div>
         <div
           onClick={toggleOpen}
@@ -75,7 +90,7 @@ export const NavbarUserMenu: React.FC<INavbarUserMenu> = ({ currentUser }) => {
         >
           <AiOutlineMenu />
           <div className="hidden md:block">
-            <NavbarAvatar imageSrc={currentUser?.image} />
+            <NavbarAvatar imageSrc={currentUser?.image} size={30} />
           </div>
         </div>
       </div>
@@ -107,6 +122,10 @@ export const NavbarUserMenu: React.FC<INavbarUserMenu> = ({ currentUser }) => {
                 <NavbarMenuItem onClick={() => {}} label="Services" />
                 <NavbarMenuItem onClick={() => {}} label="Favorites" />
                 <NavbarMenuItem onClick={() => {}} label="Reservation" />
+                <NavbarMenuItem
+                  onClick={providerModal.onOpen}
+                  label="Register a service"
+                />
                 <hr />
                 <NavbarMenuItem onClick={() => signOut()} label="Logout" />
               </>

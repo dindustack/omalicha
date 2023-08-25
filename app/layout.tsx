@@ -2,10 +2,14 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Urbanist } from "next/font/google";
 import { Navbar } from "./components/Navbar/Main";
+
 import { RegisterModal } from "./components/Modal/Register";
-import { ToasterProvider } from "./providers/ToasterProvider";
+import { ProviderModal } from "./components/Modal/ProviderModal";
 import { LoginModal } from "./components/Modal/Login";
+
+import { ToasterProvider } from "./providers/ToasterProvider";
 import getCurrentUser from "./actions/getCurrentUser";
+import ClientOnly from "./components/ClientOnly";
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
@@ -23,13 +27,14 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={urbanist.className} suppressHydrationWarning={true}>
-        <>
+        <ClientOnly>
           <ToasterProvider />
+          <ProviderModal />
           <RegisterModal />
           <LoginModal />
           <Navbar currentUser={currentUser} />
-        </>
-        {children}
+        </ClientOnly>
+        <div className="bg-[#FFFDDE]">{children}</div>
       </body>
     </html>
   );

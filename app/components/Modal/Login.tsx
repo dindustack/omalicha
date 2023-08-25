@@ -4,7 +4,6 @@ import { useCallback, useState } from "react";
 import { signIn } from "next-auth/react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-// import { BsTwitter } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
 
 import { Modal } from ".";
@@ -21,11 +20,6 @@ export const LoginModal = () => {
   const registerModal = useRegisterModal();
   const [isLoading, setIsLoading] = useState(false);
   const EMAIL_REGEX = /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/;
-
-  const handleSignupModal = useCallback(() => {
-    loginModal.onClose();
-    registerModal.onOpen();
-  }, [registerModal, loginModal]);
 
   const {
     register,
@@ -58,6 +52,11 @@ export const LoginModal = () => {
       }
     });
   };
+
+  const handleSignupModal = useCallback(() => {
+    loginModal.onClose();
+    registerModal.onOpen();
+  }, [registerModal, loginModal]);
 
   const bodyContent = (
     <div className="flex flex-col gap-8">
@@ -93,12 +92,6 @@ export const LoginModal = () => {
         onClick={() => signIn("google")}
       />
 
-      {/* <Button
-        outline
-        label="Login with Twitter"
-        icon={BsTwitter}
-        onClick={() => {}}
-      /> */}
       <div
         className="
       text-neutral-500
@@ -113,7 +106,7 @@ export const LoginModal = () => {
             onClick={handleSignupModal}
             className="text-black font-bold py-1 px-2 bg-primary rounded-md cursor-pointer hover:underline hover:underline-offset-2"
           >
-            Sign up
+            Create an account
           </div>
         </div>
       </div>

@@ -11,7 +11,6 @@ import { Heading } from "../Heading";
 import { FormInput } from "../Form/Input";
 import { Button } from "../Button";
 import { FcGoogle } from "react-icons/fc";
-import { BsTwitter } from "react-icons/bs";
 import { useLoginModal } from "@/app/hooks/useLoginModal";
 import { signIn } from "next-auth/react";
 
@@ -20,11 +19,6 @@ export const RegisterModal = () => {
   const loginModal = useLoginModal();
   const [isLoading, setIsLoading] = useState(false);
   const EMAIL_REGEX = /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/;
-
-  const handleLoginModal = useCallback(() => {
-    registerModal.onClose();
-    loginModal.onOpen();
-  }, [registerModal, loginModal]);
 
   const {
     register,
@@ -55,6 +49,11 @@ export const RegisterModal = () => {
         setIsLoading(false);
       });
   };
+
+  const handleLoginModal = useCallback(() => {
+    registerModal.onClose();
+    loginModal.onOpen();
+  }, [registerModal, loginModal]);
 
   const bodyContent = (
     <div className="flex flex-col gap-8">
