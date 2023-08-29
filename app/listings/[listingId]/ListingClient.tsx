@@ -80,7 +80,7 @@ export const ListingClient: React.FC<ListingClientProps> = ({
         listingId: listing?.id,
       })
       .then(() => {
-        toast.success("Service reserved");
+        toast.success("Venue reserved");
         setDateRange(initialDateRange);
         // Redirect to
         router.refresh();

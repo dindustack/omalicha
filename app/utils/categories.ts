@@ -91,7 +91,7 @@ export const categories: ICategory[] = [
     label: "Boat",
     icon: FaShip,
     description:
-      "Accentuate your eyes and frame your face with our eyelash and eyebrow services.",
+      "A boat venue offers a captivating and distinctive setting for events, making gatherings truly memorable as they unfold on the gentle sway of the water. With the serene expanse of the water around you and the gentle rhythm of the waves, a boat venue creates an ambiance that is both elegant and enchanting.",
   },
   {
     label: "Studio",
@@ -104,24 +104,24 @@ export const categories: ICategory[] = [
     label: "Sports",
     icon: IoMdBasketball,
     description:
-      "Enhance thExperience smooth skin with our waxing and hair removal services.",
+      "A sports venue is a purpose-built or adapted facility designed to host various sporting events and activities. These venues provide a dedicated space for athletes to compete, teams to practice, and fans to gather and cheer for their favorite teams. ",
   },
   {
     label: "Museum",
     icon: MdMuseum,
     description:
-      "Enhance thExperience smooth skin with our waxing and hair removal services.",
+      "A museum venue is a place of cultural enrichment and exploration, designed to showcase and preserve artifacts, art, historical objects, and exhibits that offer insights into various aspects of human history, culture, science, and artistry. ",
   },
   {
     label: "Cinema",
     icon: SiCinema4D,
     description:
-      "Enhance thExperience smooth skin with our waxing and hair removal services.",
+      "A cinema venue is a space dedicated to the screening of films, providing a captivating and immersive experience for audiences. This type of venue is designed to accommodate moviegoers, offering a comfortable and visually engaging environment to enjoy a wide range of films, from the latest blockbusters to independent and classic movies.",
   },
   {
     label: "Warehouse",
     icon: FaWarehouse,
     description:
-      "Enhance thExperience smooth skin with our waxing and hair removal services.",
+      "A warehouse venue is a distinctive and versatile space that offers a raw and industrial aesthetic, often repurposed to host various events. This type of venue showcases exposed brick walls, high ceilings, large open spaces, and an abundance of natural light. ",
   },
 ];
