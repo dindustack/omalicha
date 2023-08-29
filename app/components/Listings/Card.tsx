@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
 import { HeartButton } from "../HeartButton";
 import { Button } from "../Button";
+import { staticBlurDataUrl } from "@/app/utils/staticBlurUrl";
 
 interface ListingCardProps {
   data: Listing;
@@ -29,6 +30,8 @@ export const ListingCard: React.FC<ListingCardProps> = ({
 }) => {
   const router = useRouter();
   const { getByValue } = useCountries();
+
+  const getBlurSvg = staticBlurDataUrl();
 
   const location = getByValue(data.locationValue);
 
@@ -83,6 +86,8 @@ export const ListingCard: React.FC<ListingCardProps> = ({
             fill
             alt="listing"
             src={data.imageSrc}
+            placeholder="blur"
+            blurDataURL={getBlurSvg}
             className="
             object-cover
             h-full

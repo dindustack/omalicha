@@ -4,6 +4,7 @@ import { useCountries } from "@/app/hooks/useCountries";
 import { User } from "@prisma/client";
 import Image from "next/image";
 import { HeartButton } from "../HeartButton";
+import { staticBlurDataUrl } from "@/app/utils/staticBlurUrl";
 
 interface ListingHeadProps {
   title: string;
@@ -22,6 +23,9 @@ export const ListingHead: React.FC<ListingHeadProps> = ({
 }) => {
   const { getByValue } = useCountries();
   const location = getByValue(locationValue);
+
+  const getBlurSvg = staticBlurDataUrl();
+
   return (
     <>
       <div>
@@ -33,6 +37,8 @@ export const ListingHead: React.FC<ListingHeadProps> = ({
         <Image
           alt="Image"
           src={imageSrc}
+          placeholder="blur"
+          blurDataURL={getBlurSvg}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover bg-center w-full border-2 border-black rounded-xl"

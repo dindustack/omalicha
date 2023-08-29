@@ -9,6 +9,8 @@ import {
   FaTree,
   FaWarehouse,
 } from "react-icons/fa";
+import { MdMuseum } from "react-icons/md";
+import { SiCinema4D } from "react-icons/si";
 import {
   IoMdBusiness,
   IoMdBriefcase,
@@ -29,7 +31,7 @@ export const categories: ICategory[] = [
     label: "Hotels",
     icon: FaHotel,
     description:
-      "Enhance the health and appearance of your skin with our rejuvenating skincare services.",
+      "Experience luxury and comfort at our exquisite hotel, where every detail is meticulously curated to offer you an unforgettable stay. Our hotel combines modern elegance with timeless charm, providing a sanctuary for both leisure and business travelers.",
   },
   {
     label: "Convention",
@@ -59,7 +61,7 @@ export const categories: ICategory[] = [
     label: "Gallery",
     icon: IoMdColorPalette,
     description:
-      "Indulge in luxurious nail care with our manicure and pedicure services.",
+      "Discover a world of creativity and expression at our art gallery. Immerse yourself in a curated collection of captivating artworks that span diverse styles, mediums, and perspectives. Our gallery serves as a haven for artists and art enthusiasts alike, where every brushstroke and stroke of genius is celebrated.",
   },
   {
     label: "Stadium",
@@ -70,19 +72,20 @@ export const categories: ICategory[] = [
   {
     label: "Restaurant",
     icon: IoMdRestaurant,
-    description: "Unleash your inner beauty with our expert makeup services.",
+    description:
+      "Indulge in a culinary journey at our restaurant, where delectable flavors and exceptional service come together to create a memorable dining experience. From carefully curated menus inspired by global cuisines to an inviting ambiance that exudes warmth and elegance.",
   },
   {
     label: "Outdoor",
     icon: FaTree,
     description:
-      "Experience relaxation and rejuvenation through our massage and body treatments.",
+      "Discover the perfect harmony of nature and celebration with our outdoor event venue. Nestled amidst lush landscapes and under open skies, our outdoor space offers a picturesque setting for your special occasions. ",
   },
   {
     label: "Golf",
     icon: FaGolfBall,
     description:
-      "Experience relaxation and rejuvenation through our massage and body treatments.",
+      "A golf course is a serene and picturesque landscape where the love of sport and the beauty of nature intertwine. Spanning across rolling hills and lush greens, a golf course offers a sanctuary for both seasoned golf enthusiasts and those seeking leisurely recreation. ",
   },
   {
     label: "Boat",
@@ -94,12 +97,24 @@ export const categories: ICategory[] = [
     label: "Studio",
     icon: FaPalette,
     description:
-      "Enhance thExperience smooth skin with our waxing and hair removal services.",
+      "Our studio is a haven for creativity and innovation, designed to inspire artists, creators, and visionaries alike. With its open layout and ample natural light, the studio provides an inviting atmosphere that fosters imagination and collaboration.",
   },
 
   {
     label: "Sports",
     icon: IoMdBasketball,
+    description:
+      "Enhance thExperience smooth skin with our waxing and hair removal services.",
+  },
+  {
+    label: "Museum",
+    icon: MdMuseum,
+    description:
+      "Enhance thExperience smooth skin with our waxing and hair removal services.",
+  },
+  {
+    label: "Cinema",
+    icon: SiCinema4D,
     description:
       "Enhance thExperience smooth skin with our waxing and hair removal services.",
   },
