@@ -60,7 +60,7 @@ export const LoginModal = () => {
 
   const bodyContent = (
     <div className="flex flex-col gap-8">
-      <Heading title="Welcome back" subtitle="Login to book a service" center />
+      <Heading title="Welcome back" subtitle="Login to book a venue" center />
       <FormInput
         id="email"
         label="Email"

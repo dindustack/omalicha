@@ -67,7 +67,7 @@ export const NavbarUserMenu: React.FC<INavbarUserMenu> = ({ currentUser }) => {
             
             "
         >
-          Register a service
+          Register a venue
         </div>
         <div
           onClick={toggleOpen}
@@ -124,7 +124,7 @@ export const NavbarUserMenu: React.FC<INavbarUserMenu> = ({ currentUser }) => {
                 <NavbarMenuItem onClick={() => {}} label="Reservation" />
                 <NavbarMenuItem
                   onClick={providerModal.onOpen}
-                  label="Register a service"
+                  label="Register a venue"
                 />
                 <hr />
                 <NavbarMenuItem onClick={() => signOut()} label="Logout" />

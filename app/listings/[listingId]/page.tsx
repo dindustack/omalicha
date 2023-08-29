@@ -20,9 +20,9 @@ const ListingPage = async ({ params }: { params: IParams }) => {
     );
   }
   return (
-    <div className="min-h-[100vh]">
+    <>
       <ListingClient listing={listing} currentUser={currentUser} />
-    </div>
+    </>
   );
 };
 

@@ -47,7 +47,7 @@ export const NavbarSearch = () => {
           text-center
         "
         >
-          Lagos, Nigeria
+          Nigeria
         </div>
         <div
           className="

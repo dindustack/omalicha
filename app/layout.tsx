@@ -14,8 +14,8 @@ import ClientOnly from "./components/ClientOnly";
 const urbanist = Urbanist({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Omalicha",
-  description: "A beauty marketplace",
+  title: "Venuefy",
+  description: "A venue booking platform",
 };
 
 export default async function RootLayout({

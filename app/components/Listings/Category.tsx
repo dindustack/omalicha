@@ -14,7 +14,7 @@ export const ListingCategory: React.FC<ListingCategoryProps> = ({
   description,
 }) => {
   return (
-    <div className="flex flex-col gap-6 flex-grow-[1]">
+    <div className="flex flex-col gap-6 lg:flex-grow-[1]">
       <div className="flex flex-row items-center gap-4">
         <div
           className="
@@ -26,12 +26,12 @@ export const ListingCategory: React.FC<ListingCategoryProps> = ({
             py-2
         "
         >
-          <Icon size={36} className="text-black" />
+          <Icon size={24} className="text-black" />
         </div>
-        <div className="flex flex-col">
-          <div className="text-lg font-semibold">{label}</div>
-          <div className="text-neutral-500 font-light">{description}</div>
-        </div>
+        <div className="text-2xl font-semibold">{label}</div>
+      </div>
+      <div className="text-neutral-500 font-light break-normal">
+        {description}
       </div>
     </div>
   );
