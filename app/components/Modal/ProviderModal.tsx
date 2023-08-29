@@ -45,8 +45,9 @@ export const ProviderModal = () => {
     defaultValues: {
       category: "",
       location: null,
-      clientCount: 1,
-      experience: 1,
+      capacity: 1,
+      restroom: 1,
+      parkingCount: 1,
       imageSrc: "",
       title: "",
       description: "",
@@ -56,8 +57,9 @@ export const ProviderModal = () => {
 
   const category = watch("category");
   const location = watch("location");
-  const clientCount = watch("clientCount");
-  const experience = watch("experience");
+  const capacity = watch("capacity");
+  const restroom = watch("restroom");
+  const parkingCount = watch("parkingCount");
   const imageSrc = watch("imageSrc");
 
   const DynamicMap = useMemo(
@@ -149,7 +151,7 @@ export const ProviderModal = () => {
     bodyContent = (
       <div className="flex flex-col gap-8">
         <Heading
-          title="Where is your place located?"
+          title="Where is your venue located?"
           subtitle="Help clients find you!"
         />
         <CountrySelect
@@ -165,22 +167,29 @@ export const ProviderModal = () => {
     bodyContent = (
       <div className="flex flex-col gap-8">
         <Heading
-          title="Share basic information about your business"
+          title="Share basic information about your venue"
           subtitle="What services do you offer?"
         />
 
         <Counter
-          title="Clients"
-          subtitle="How many clients per day"
-          value={clientCount}
-          onChange={(value) => setCustomValue("clientCount", value)}
+          title="Capacity"
+          subtitle="What is the seating capacity?"
+          value={capacity}
+          onChange={(value) => setCustomValue("capacity", value)}
         />
 
         <Counter
-          title="Experience"
-          subtitle="How many years of experience"
-          value={experience}
-          onChange={(value) => setCustomValue("experience", value)}
+          title="Restroom"
+          subtitle="How many restrooms?"
+          value={restroom}
+          onChange={(value) => setCustomValue("restroom", value)}
+        />
+
+        <Counter
+          title="Parking"
+          subtitle="How is the parking size?"
+          value={parkingCount}
+          onChange={(value) => setCustomValue("parkingCount", value)}
         />
       </div>
     );
@@ -190,8 +199,8 @@ export const ProviderModal = () => {
     bodyContent = (
       <div className="flex flex-col gap-8">
         <Heading
-          title="Add a photo of your service"
-          subtitle="Show clients your service"
+          title="Add a photo of your venue"
+          subtitle="Show clients your venue"
         />
         <ImageUpload
           value={imageSrc}
@@ -205,7 +214,7 @@ export const ProviderModal = () => {
     bodyContent = (
       <div className="flex flex-col gap-8">
         <Heading
-          title="How would you describe your business"
+          title="How would you describe your venue"
           subtitle="The shorter the better!"
         />
         <FormInput
@@ -260,7 +269,7 @@ export const ProviderModal = () => {
       onSubmit={handleSubmit(onSubmit)}
       secondaryActionLabel={secondaryActionLabel}
       secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
-      title="Become a service provider"
+      title="Become a venue provider"
       body={bodyContent}
     />
   );

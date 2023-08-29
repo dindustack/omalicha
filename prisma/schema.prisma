@@ -49,8 +49,9 @@ model Listing {
   imageSrc      String
   createdAt     DateTime @default(now())
   category      String
-  clientCount   Int
-  experience    Int
+  capacity      Int
+  restroom      Int
+  parkingCount  Int
   locationValue String
   userId        String   @db.ObjectId
   price         Int

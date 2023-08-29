@@ -59,7 +59,7 @@ export const RegisterModal = () => {
     <div className="flex flex-col gap-8">
       <Heading
         title="Welcome"
-        subtitle="Create an account to book a service"
+        subtitle="Create an account to book a venue"
         center
       />
       <FormInput
