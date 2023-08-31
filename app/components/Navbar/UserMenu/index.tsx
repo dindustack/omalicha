@@ -124,7 +124,10 @@ export const NavbarUserMenu: React.FC<INavbarUserMenu> = ({ currentUser }) => {
                   onClick={() => router.push("/bookings")}
                   label="Bookings"
                 />
-                <NavbarMenuItem onClick={() => {}} label="Favorites" />
+                <NavbarMenuItem
+                  onClick={() => router.push("/favourites")}
+                  label="Favourites"
+                />
                 <NavbarMenuItem
                   onClick={() => router.push("/reservations")}
                   label="Reservation"
