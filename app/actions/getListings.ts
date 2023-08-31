@@ -7,8 +7,14 @@ export default async function getListings() {
         createdAt: "desc",
       },
     });
-    return listings;
+    const safeListings = listings.map((listing) => ({
+      ...listing,
+      createdAt: listing.createdAt.toISOString(),
+    }));
+
+    return safeListings;
   } catch (error) {
+    // throw new Error(error);
     if (error instanceof Error) {
       throw new Error(
         JSON.stringify({ status: "fail", message: error.message })
