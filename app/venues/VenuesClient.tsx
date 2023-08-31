@@ -10,8 +10,8 @@ import { ListingCard } from "../components/Listings/Card";
 import { SafeReservation, SafeUser } from "../types";
 
 interface VenuesClientProps {
-  reservations?: SafeReservation[];
-  currentUser: SafeUser | null;
+  reservations: SafeReservation[];
+  currentUser?: SafeUser | null;
 }
 
 export const VenuesClient: React.FC<VenuesClientProps> = ({

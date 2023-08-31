@@ -3,6 +3,7 @@ import { EmptyState } from "../components/EmptyState";
 import ClientOnly from "../components/ClientOnly";
 import getReservations from "../actions/getReservations";
 import { VenuesClient } from "./VenuesClient";
+import { SafeReservation } from "../types";
 
 const VenuesPage = async () => {
   const currentUser = await getCurrentUser();
@@ -19,8 +20,6 @@ const VenuesPage = async () => {
     userId: currentUser.id,
   });
 
-  console.log(reservations);
-
   if (reservations?.length === 0) {
     return (
       <ClientOnly>
@@ -34,7 +33,10 @@ const VenuesPage = async () => {
 
   return (
     <ClientOnly>
-      <VenuesClient reservations={reservations} currentUser={currentUser} />
+      <VenuesClient
+        reservations={reservations as SafeReservation[]}
+        currentUser={currentUser}
+      />
     </ClientOnly>
   );
 };
