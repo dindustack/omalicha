@@ -1,8 +1,20 @@
 import prisma from "@/app/libs/prismadb";
 
-export default async function getListings() {
+export interface IListingParams {
+  userId?: string;
+}
+
+export default async function getListings(params: IListingParams) {
   try {
+    const { userId } = params;
+    let query: any = {};
+
+    if (userId) {
+      query.userId = userId;
+    }
+
     const listings = await prisma.listing.findMany({
+      where: query,
       orderBy: {
         createdAt: "desc",
       },
@@ -14,7 +26,6 @@ export default async function getListings() {
 
     return safeListings;
   } catch (error) {
-    // throw new Error(error);
     if (error instanceof Error) {
       throw new Error(
         JSON.stringify({ status: "fail", message: error.message })
