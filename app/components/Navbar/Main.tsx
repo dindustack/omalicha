@@ -13,7 +13,7 @@ interface INavbarProps {
 
 export const Navbar: React.FC<INavbarProps> = ({ currentUser }) => {
   return (
-    <div className="fixed w-full bg-white backdrop-blur-[10px] z-10">
+    <div className="fixed w-full backdrop-blur-[10px] z-10">
       <div className="py-4 border-b-[1px]">
         <Container>
           <div

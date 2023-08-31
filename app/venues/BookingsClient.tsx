@@ -9,12 +9,12 @@ import { Heading } from "../components/Heading";
 import { ListingCard } from "../components/Listings/Card";
 import { SafeReservation, SafeUser } from "../types";
 
-interface VenuesClientProps {
+interface BookingsClientProps {
   reservations: SafeReservation[];
   currentUser?: SafeUser | null;
 }
 
-export const VenuesClient: React.FC<VenuesClientProps> = ({
+export const BookingsClient: React.FC<BookingsClientProps> = ({
   reservations,
   currentUser,
 }) => {
