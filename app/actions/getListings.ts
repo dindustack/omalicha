@@ -25,11 +25,7 @@ export default async function getListings(params: IListingParams) {
     }));
 
     return safeListings;
-  } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(
-        JSON.stringify({ status: "fail", message: error.message })
-      );
-    }
+  } catch (error: any) {
+    throw new Error(error);
   }
 }

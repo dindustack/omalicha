@@ -1,11 +1,11 @@
 import React from "react";
 import getListings, { IListingParams } from "./actions/getListings";
+import getCurrentUser from "./actions/getCurrentUser";
 
 import ClientOnly from "./components/ClientOnly";
 import { EmptyState } from "./components/EmptyState";
 import { Container } from "./components/Navbar/Container";
 import { ListingCard } from "./components/Listings/Card";
-import getCurrentUser from "./actions/getCurrentUser";
 
 interface HomeProps {
   searchParams: IListingParams;
