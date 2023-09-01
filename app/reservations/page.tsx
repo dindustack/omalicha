@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import getCurrentUser from "../actions/getCurrentUser";
 import getReservations from "../actions/getReservations";
 import ClientOnly from "../components/ClientOnly";
@@ -9,11 +10,7 @@ const ReservationsPage = async () => {
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
-    return (
-      <ClientOnly>
-        <EmptyState title="Unauthorized" subtitle="Please login" />
-      </ClientOnly>
-    );
+    return <EmptyState title="Unauthorized" subtitle="Please login" />;
   }
 
   const reservations = await getReservations({
@@ -22,22 +19,20 @@ const ReservationsPage = async () => {
 
   if (reservations?.length === 0) {
     return (
-      <ClientOnly>
-        <EmptyState
-          title="No reservations found"
-          subtitle="Looks like you have no reservations on your venues"
-        />
-      </ClientOnly>
+      <EmptyState
+        title="No reservations found"
+        subtitle="Looks like you have no reservations on your venues"
+      />
     );
   }
 
   return (
-    <ClientOnly>
+    <Suspense>
       <ReservationsClient
         reservations={reservations as SafeReservation[]}
         currentUser={currentUser}
       />
-    </ClientOnly>
+    </Suspense>
   );
 };
 

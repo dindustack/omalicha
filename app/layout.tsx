@@ -10,6 +10,7 @@ import { LoginModal } from "./components/Modal/Login";
 import { ToasterProvider } from "./providers/ToasterProvider";
 import getCurrentUser from "./actions/getCurrentUser";
 import ClientOnly from "./components/ClientOnly";
+import { SearchModal } from "./components/Modal/Search";
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
@@ -27,13 +28,14 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={urbanist.className} suppressHydrationWarning={true}>
-        <ClientOnly>
+        <>
           <ToasterProvider />
+          <SearchModal />
           <ProviderModal />
           <RegisterModal />
           <LoginModal />
           <Navbar currentUser={currentUser} />
-        </ClientOnly>
+        </>
         <div className="pt-28 pb-20">{children}</div>
       </body>
     </html>

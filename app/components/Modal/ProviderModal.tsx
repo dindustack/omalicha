@@ -129,7 +129,7 @@ export const ProviderModal = () => {
   let bodyContent = (
     <div className="flex flex-col gap-8">
       <Heading
-        title="Which of this best describes your service"
+        title="Which of this best describes your venue"
         subtitle="Pick a category"
       />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[50vh] overflow-y-auto">

@@ -1,14 +1,14 @@
-import React from "react";
-import getListings, { IListingParams } from "./actions/getListings";
+import React, { Suspense } from "react";
+export const dynamic = "force-dynamic";
+import getListings, { IListingsParams } from "./actions/getListings";
 import getCurrentUser from "./actions/getCurrentUser";
 
-import ClientOnly from "./components/ClientOnly";
 import { EmptyState } from "./components/EmptyState";
 import { Container } from "./components/Navbar/Container";
 import { ListingCard } from "./components/Listings/Card";
 
 interface HomeProps {
-  searchParams: IListingParams;
+  searchParams: IListingsParams;
 }
 
 const Home = async ({ searchParams }: HomeProps) => {
@@ -16,14 +16,11 @@ const Home = async ({ searchParams }: HomeProps) => {
   const currentUser = await getCurrentUser();
 
   if (listings?.length === 0) {
-    return (
-      <ClientOnly>
-        <EmptyState showReset />
-      </ClientOnly>
-    );
+    return <EmptyState showReset />;
   }
+
   return (
-    <>
+    <Suspense>
       <Container>
         <div
           className="
@@ -46,7 +43,7 @@ const Home = async ({ searchParams }: HomeProps) => {
           )}
         </div>
       </Container>
-    </>
+    </Suspense>
   );
 };
 

@@ -4,6 +4,7 @@ import ClientOnly from "../components/ClientOnly";
 import getReservations from "../actions/getReservations";
 import { SafeReservation } from "../types";
 import { BookingsClient } from "./BookingsClient";
+import { Suspense } from "react";
 
 const BookingsPage = async () => {
   const currentUser = await getCurrentUser();
@@ -32,12 +33,12 @@ const BookingsPage = async () => {
   }
 
   return (
-    <ClientOnly>
+    <Suspense>
       <BookingsClient
         reservations={reservations as SafeReservation[]}
         currentUser={currentUser}
       />
-    </ClientOnly>
+    </Suspense>
   );
 };
 
