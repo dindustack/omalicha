@@ -84,13 +84,13 @@ export const LoginModal = () => {
 
   const footerCount = (
     <div className="flex flex-col gap-4 mt-3">
-      <hr />
-      <Button
+      {/* <hr /> */}
+      {/* <Button
         outline
         label="Login with Google"
         icon={FcGoogle}
         onClick={() => signIn("google")}
-      />
+      /> */}
 
       <div
         className="
