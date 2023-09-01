@@ -3,14 +3,8 @@
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import {
-  differenceInCalendarDays,
-  differenceInDays,
-  eachDayOfInterval,
-} from "date-fns";
+import { differenceInCalendarDays, eachDayOfInterval } from "date-fns";
 import { useCallback, useEffect, useMemo, useState } from "react";
-
-import { Listing, Reservation, User } from "@prisma/client";
 
 import { ListingReservation } from "@/app/components/Listings/Reservation";
 import { ListingHead } from "@/app/components/Listings/Head";
@@ -19,6 +13,7 @@ import { Container } from "@/app/components/Navbar/Container";
 import { useLoginModal } from "@/app/hooks/useLoginModal";
 import { categories } from "@/app/utils/categories";
 import { Range } from "react-date-range";
+import { SafeListing, SafeReservation, SafeUser } from "@/app/types";
 
 const initialDateRange = {
   startDate: new Date(),
@@ -27,11 +22,11 @@ const initialDateRange = {
 };
 
 interface ListingClientProps {
-  reservations?: Reservation[];
-  listing: Listing & {
-    user: User;
+  reservations?: SafeReservation[];
+  listing: SafeListing & {
+    user: SafeUser;
   };
-  currentUser?: User | null;
+  currentUser?: SafeUser | null;
 }
 
 export const ListingClient: React.FC<ListingClientProps> = ({
@@ -80,10 +75,9 @@ export const ListingClient: React.FC<ListingClientProps> = ({
         listingId: listing?.id,
       })
       .then(() => {
-        toast.success("Service reserved");
+        toast.success("Venue reserved");
         setDateRange(initialDateRange);
-        // Redirect to
-        router.refresh();
+        router.push("/venues");
       })
       .finally(() => {
         setIsLoading(false);
@@ -94,8 +88,6 @@ export const ListingClient: React.FC<ListingClientProps> = ({
     if (dateRange.startDate && dateRange.endDate) {
       const dayCount =
         differenceInCalendarDays(dateRange.endDate, dateRange.startDate) + 1;
-
-      console.log(dayCount);
 
       if (dayCount && listing.price) {
         setTotalPrice(dayCount * listing.price);

@@ -3,21 +3,22 @@
 import { useCallback, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 import { NavbarAvatar } from "../Avatar";
 import { NavbarMenuItem } from "../MenuItem";
 
-import { User } from "@prisma/client";
 import { useRegisterModal } from "@/app/hooks/useRegisterModal";
 import { useLoginModal } from "@/app/hooks/useLoginModal";
 import { useProviderModal } from "@/app/hooks/useProviderModal";
-// import { SafeUser } from "@/app/types";
+import { SafeUser } from "@/app/types";
 
 interface INavbarUserMenu {
-  currentUser?: User | null;
+  currentUser?: SafeUser | null;
 }
 
 export const NavbarUserMenu: React.FC<INavbarUserMenu> = ({ currentUser }) => {
+  const router = useRouter();
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
   const providerModal = useProviderModal();
@@ -119,9 +120,23 @@ export const NavbarUserMenu: React.FC<INavbarUserMenu> = ({ currentUser }) => {
           >
             {currentUser ? (
               <>
-                <NavbarMenuItem onClick={() => {}} label="Services" />
-                <NavbarMenuItem onClick={() => {}} label="Favorites" />
-                <NavbarMenuItem onClick={() => {}} label="Reservation" />
+                <NavbarMenuItem
+                  onClick={() => router.push("/bookings")}
+                  label="Bookings"
+                />
+                <NavbarMenuItem
+                  onClick={() => router.push("/favourites")}
+                  label="Favourites"
+                />
+                <NavbarMenuItem
+                  onClick={() => router.push("/reservations")}
+                  label="Reservation"
+                />
+                <NavbarMenuItem
+                  onClick={() => router.push("/properties")}
+                  label="Properties"
+                />
+
                 <NavbarMenuItem
                   onClick={providerModal.onOpen}
                   label="Register a venue"

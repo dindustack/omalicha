@@ -1,25 +1,26 @@
-import React from "react";
-import getListings from "./actions/getListings";
+import React, { Suspense } from "react";
+export const dynamic = "force-dynamic";
+import getListings, { IListingsParams } from "./actions/getListings";
+import getCurrentUser from "./actions/getCurrentUser";
 
-import ClientOnly from "./components/ClientOnly";
 import { EmptyState } from "./components/EmptyState";
 import { Container } from "./components/Navbar/Container";
 import { ListingCard } from "./components/Listings/Card";
-import getCurrentUser from "./actions/getCurrentUser";
 
-export default async function Home() {
-  const listings = await getListings();
+interface HomeProps {
+  searchParams: IListingsParams;
+}
+
+const Home = async ({ searchParams }: HomeProps) => {
+  const listings = await getListings(searchParams);
   const currentUser = await getCurrentUser();
 
   if (listings?.length === 0) {
-    return (
-      <ClientOnly>
-        <EmptyState showReset />
-      </ClientOnly>
-    );
+    return <EmptyState showReset />;
   }
+
   return (
-    <>
+    <Suspense>
       <Container>
         <div
           className="
@@ -42,6 +43,8 @@ export default async function Home() {
           )}
         </div>
       </Container>
-    </>
+    </Suspense>
   );
-}
+};
+
+export default Home;
